@@ -21,16 +21,15 @@ def orthogonalize(U):
     V = np.zeros_like(U)
 
     for i in range(num_vectors):
-    V[:, i] = U[:, i]
-    for j in range(i):
-        norm_Vj = la.norm(V[:, j])
-        if norm_Vj > 1e-15:  # small threshold to handle numerical errors
-            proj = np.dot(V[:, j], U[:, i]) / norm_Vj**2
-            V[:, i] -= proj * V[:, j]
+        V[:, i] = U[:, i]
+        for j in range(i):
+            norm_Vj = la.norm(V[:, j])
+            if norm_Vj > 1e-15:  # small threshold to handle numerical errors
+                proj = np.dot(V[:, j], U[:, i]) / norm_Vj**2
+                V[:, i] -= proj * V[:, j]
 
-    if la.norm(V[:, i]) > 1e-15:
-        V[:, i] /= la.norm(V[:, i])
-
+        if la.norm(V[:, i]) > 1e-15:
+            V[:, i] /= la.norm(V[:, i])
     return V
 
 # Example usage:
